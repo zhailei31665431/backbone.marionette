@@ -1,3 +1,13 @@
+### v1.8.6 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.8.5...v1.8.6)
+
+  * Regions
+    * `Region.show` now returns the region instance to allow for region operation chaining.
+
+  * General
+    * Update jquery 2.x upper bound dependency restrictions.
+    * The grunt test command will now complain if you do not have bower components installed.
+    * Readme cleanups.
+
 ### v1.8.5 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.8.4...v1.8.5)
 
   * Fixes
