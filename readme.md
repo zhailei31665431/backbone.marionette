@@ -5,10 +5,9 @@
 [![Build Status](https://secure.travis-ci.org/marionettejs/backbone.marionette.svg?branch=master)](http://travis-ci.org/marionettejs/backbone.marionette)
 
 
-## About Marionette
+## 关于 Marionette
 
-Backbone.Marionette is a composite application library for Backbone.js that
-aims to simplify the construction of large scale JavaScript applications.
+Backbone.Marionette是Backbone.js的复合应用程序库，旨在简化大型JavaScript应用程序的构建.
 It is a collection of common design and implementation patterns found in
 the applications that I (Derick Bailey) have been building with Backbone,
 and includes various pieces inspired by composite application architectures,
