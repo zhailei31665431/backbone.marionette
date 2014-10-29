@@ -1,6 +1,6 @@
 # Backbone.Marionette
 
-Make your Backbone.js apps dance!
+构建 Backbone.js 应用 dance!
 
 [![Build Status](https://secure.travis-ci.org/marionettejs/backbone.marionette.svg?branch=master)](http://travis-ci.org/marionettejs/backbone.marionette)
 
