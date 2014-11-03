@@ -1,33 +1,28 @@
 # Marionette.Application
 
-The `Backbone.Marionette.Application` object is the hub of your composite
-application. It organizes, initializes and coordinates the various pieces of your
-app. It also provides a starting point for you to call into, from your HTML
-script block or from your JavaScript files directly if you prefer to go that
-route.
+`Backbone.Marionette.Application` 对象是复合应用程序的枢纽.它组织，初始化并且协调您的应用程序.如果你喜欢，它为你提供了一个节点，在你的html>script标签或者javascript文件里.
 
-The `Application` is meant to be instantiated directly, although you can extend
-it to add your own functionality.
+`Application` 是这样直接初始化实例,你也可以扩展它来添加自己的功能.
 
 ```js
 MyApp = new Backbone.Marionette.Application();
 ```
 
-## Documentation Index
+## 目录索引
 
-* [Adding Initializers](#adding-initializers)
-* [Application Event](#application-event)
-* [Starting An Application](#starting-an-application)
-* [Messaging Systems](#messaging-systems)
-  * [Event Aggregator](#event-aggregator)
-  * [Request Response](#request-response)
-  * [Commands](#commands)
-* [Regions And The Application Object](#regions-and-the-application-object)
-  * [jQuery Selector](#jquery-selector)
-  * [Custom Region Type](#custom-region-type)
-  * [Custom Region Type And Selector](#custom-region-type-and-selector)
-  * [Get Region By Name](#get-region-by-name)
-  * [Removing Regions](#removing-regions)
+* [添加初始化器](#adding-initializers)
+* [应用程序事件](#application-event)
+* [启动应用程序](#starting-an-application)
+* [系统消息](#messaging-systems)
+  * [事件聚合](#event-aggregator)
+  * [请求响应](#request-response)
+  * [命令](#commands)
+* [区域和应用程序对象](#regions-and-the-application-object)
+  * [jQuery选择](#jquery-selector)
+  * [自定义区域类型](#custom-region-type)
+  * [自定义区域类型选择](#custom-region-type-and-selector)
+  * [按名称获取区域](#get-region-by-name)
+  * [删除区域](#removing-regions)
 
 ## Adding Initializers
 
