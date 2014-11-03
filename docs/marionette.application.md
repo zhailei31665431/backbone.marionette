@@ -24,12 +24,9 @@ MyApp = new Backbone.Marionette.Application();
   * [按名称获取区域](#get-region-by-name)
   * [删除区域](#removing-regions)
 
-## Adding Initializers
+## 添加初始化器
 
-Your application needs to do useful things, like displaying content in your
-regions, starting up your routers, and more. To accomplish these tasks and
-ensure that your `Application` is fully configured, you can add initializer
-callbacks to the application.
+你的应用程序需要做有用的事情, 像在区域里面显示内容,启动你的路由并且其他事情. 为了完成这些并且确保你的 `Application` 配置成功，你可以添加初始化并且回掉到你的应用程序.
 
 ```js
 MyApp.addInitializer(function(options){
@@ -46,28 +43,18 @@ MyApp.addInitializer(function(options){
 });
 ```
 
-These callbacks will be executed when you start your application,
-and are bound to the application object as the context for
-the callback. In other words, `this` is the `MyApp` object, inside
-of the initializer function.
+当你启动应用程序，这些回调将被执行，并且被绑定到应用程序对象作为上下文回调.换句话说，`this`是`MyApp`对象，初始化函数的内部.
 
-The `options` parameters is passed from the `start` method (see below).
+`options`参数是通过`start`传递的（见下文）.
 
-Initializer callbacks are guaranteed to run, no matter when you
-add them to the app object. If you add them before the app is
-started, they will run when the `start` method is called. If you
-add them after the app is started, they will run immediately.
+无论何时你将它们添加到应用程序对象,初始化的回掉都可以被执行. 如果你添加她们在程序开始前，它们就会在`start`函数前执行.如果你添加在程序执行之后，它们会立刻执行.
 
-## Application Event
+## 应用程序事件
 
-The `Application` object raises a few events during its lifecycle, using the
-[Marionette.triggerMethod](./marionette.functions.md) function. These events
-can be used to do additional processing of your application. For example, you
-may want to pre-process some data just before initialization happens. Or you may
-want to wait until your entire application is initialized to start the
-`Backbone.history`.
+在`Application`对象的生命周期中引发一些事件,使用[Marionette.triggerMethod](./marionette.functions.md)该功能.
+这些事件可以用来做你的应用程序的额外的处理.举个例子, 你可能想预先处理一些数据的初始化发生之前.或者，您可能要等到整个应用程序初始化启动`Backbone.history`.
 
-The events that are currently triggered, are:
+下面这些事件都会触发:
 
 * **"initialize:before" / `onInitializeBefore`**: fired just before the initializers kick off
 * **"initialize:after" / `onInitializeAfter`**: fires just after the initializers have finished
@@ -85,18 +72,13 @@ MyApp.on("initialize:after", function(options){
 });
 ```
 
-The `options` parameter is passed through the `start` method of the application
-object (see below).
+`options`参数是通过`start`传递的（见下文）.
 
-## Starting An Application
+## 启动应用程序
 
-Once you have your application configured, you can kick everything off by
-calling: `MyApp.start(options)`.
+第一次配置你的应用程序，你可以通过调用`MyApp.start(options)`触发时间.
 
-This function takes a single optional parameter. This parameter will be passed
-to each of your initializer functions, as well as the initialize events. This
-allows you to provide extra configuration for various parts of your app, at
-initialization/start of the app, instead of just at definition.
+这个函数接受一个可选的参数. 这个参数可以通过每一个初始化的函数以及初始化事件.这使您可以为您的应用程序的各个部分提供额外的配置, 在应用程序的初始化/启动, 而不是仅仅在定义.
 
 ```js
 var options = {
@@ -107,85 +89,79 @@ var options = {
 MyApp.start(options);
 ```
 
-## Messaging Systems
+## 系统消息
 
-Application instances have an instance of all three [messaging systems](http://en.wikipedia.org/wiki/Message_passing) of `Backbone.Wreqr` attached to them. This
-section will give a brief overview of the systems; for a more in-depth look you are encouraged to read
-the [`Backbone.Wreqr` documentation](https://github.com/marionettejs/backbone.wreqr).
+应用实例有三个例子 [messaging systems](http://en.wikipedia.org/wiki/Message_passing) 关于 `Backbone.Wreqr` 看链接. 本节将给出系统的简要概述; 为更深入地了解我们鼓励你阅读 [`Backbone.Wreqr` documentation](https://github.com/marionettejs/backbone.wreqr).
 
-### Event Aggregator
+### 事件聚合
 
-The Event Aggregator is available through the `vent` property. `vent` is convenient for passively sharing information between
-pieces of your application as events occur.
+事件聚合通过 `vent`属性. `vent` 方便您的应用程序块之间共享信息事件.
 
 ```js
 MyApp = new Backbone.Marionette.Application();
 
-// Alert the user on the 'minutePassed' event
+// 提醒用户"minutePassed"事件
 MyApp.vent.on("minutePassed", function(someData){
   alert("Received", someData);
 });
 
-// This will emit an event with the value of window.someData every minute
+// 这将每分钟发出一个事件"minutePassed"
 window.setInterval(function() {
   MyApp.vent.trigger("minutePassed", window.someData);
 }, 1000 * 60);
 ```
 
-### Request Response
+### 请求响应
 
 Request Response is a means for any component to request information from another component without being tightly coupled. An instance of Request Response is available on the Application as the `reqres` property.
 
 ```js
 MyApp = new Backbone.Marionette.Application();
 
-// Set up a handler to return a todoList based on type
+// 建立一个处理程序根据类型返回todolist的
 MyApp.reqres.setHandler("todoList", function(type){
   return this.todoLists[type];
 });
 
-// Make the request to get the grocery list
+// 获得购物清单要求
 var groceryList = MyApp.reqres.request("todoList", "groceries");
 
-// The request method can also be accessed directly from the application object
+// 请求的方法，也可直接从应用程序对象访问
 var groceryList = MyApp.request("todoList", "groceries");
 ```
 
-### Commands
+### 命令
 
-Commands is used to make any component tell another component to perform an action without a direct reference to it. A Commands instance is available under the `commands` property of the Application.
+命令用于使任何组件告诉另一个组件不直接引用它执行的操作. 在应用中`commands`属性下的命令实例可用.
 
-Note that the callback of a command is not meant to return a value.
+注意，一个命令的回调并不意味着有返回值.
 
 ```js
 MyApp = new Backbone.Marionette.Application();
 
 MyApp.model = new Backbone.Model();
 
-// Set up the handler to call fetch on the model
+// 建立处理程序获取数据
 MyApp.commands.setHandler("fetchData", function(reset){
   MyApp.model.fetch({reset: reset});
 });
 
-// Order that the data be fetched
+// 获取数据
 MyApp.commands.execute("fetchData", true);
 
-// The execute function is also available directly from the application
+// 可以直接从应用程序执行此功能
 MyApp.execute("fetchData", true);
 ```
 
-## Regions And The Application Object
+## 区域和应用程序对象
 
-Marionette's `Region` objects can be directly added to an application by
-calling the `addRegions` method.
+Marionette's `Region` 对象，可以通过调用`addRegions`方法直接加入到一个应用程序.
 
-There are three syntax forms for adding a region to an application object.
+有三种方式，将一个区域变成一个应用程序对象.
 
-### jQuery Selector
+### jQuery 选择器
 
-The first is to specify a jQuery selector as the value of the region
-definition. This will create an instance of a Marionette.Region directly,
-and assign it to the selector:
+先是要使用一个jQuery选择器选作区域定义的值.这将直接创建Marionette.Region的一个实例,并将其分配给选择:
 
 ```js
 MyApp.addRegions({
@@ -194,10 +170,9 @@ MyApp.addRegions({
 });
 ```
 
-### Custom Region Type
+### 自定义区域类型
 
-The second is to specify a custom region type, where the region type has
-already specified a selector:
+第二个是指定一个自定义区域类型, 其中，区域类型已经指定一个选择器:
 
 ```js
 MyCustomRegion = Marionette.Region.extend({
@@ -209,10 +184,9 @@ MyApp.addRegions({
 });
 ```
 
-### Custom Region Type And Selector
+### 自定义区域类型选择
 
-The third method is to specify a custom region type, and a jQuery selector
-for this region instance, using an object literal:
+第三种方法是指定自定义区域类型和一个jQuery选择器，用于该区域的实例,使用对象:
 
 ```js
 MyCustomRegion = Marionette.Region.extend({});
@@ -232,9 +206,9 @@ MyApp.addRegions({
 });
 ```
 
-### Get Region By Name
+### 通过名称获取区域
 
-A region can be retrieved by name, using the `getRegion` method:
+一个区域可以通过名称搜索，使用`getRegion`方法:
 
 ```js
 var app = new Marionette.Application();
@@ -245,19 +219,16 @@ var r1 = app.getRegion("r1");
 var r1Again = app.r1;
 ```
 
-Accessing a region by named attribute is equivalent to accessing
-it from the `getRegion` method.
+通过指定属性访问的区域相当于从`getRegion`方法访问它.
 
-### Removing Regions
+### 删除区域
 
-Regions can also be removed with the `removeRegion` method, passing in
-the name of the region to remove as a string value:
+Regions可以用'removeRegion`方法去除, 通过一个区域的名称删除（字符串）:
 
 ```js
 MyApp.removeRegion('someRegion');
 ```
 
-Removing a region will properly close it before removing it from the
-application object.
+从应用程序删除区域之前会正确关闭自己.
 
-For more information on regions, see [the region documentation](./marionette.region.md)
+有关区域的详细信息, 看[the region documentation](./marionette.region.md)
